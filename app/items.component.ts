@@ -3,9 +3,7 @@ import {ItemService} from './item.service';
 
 @Component({
     selector: 'items',
-    template: `<ul *ngFor='let item of items'>
-       <li>{{item}}</li>
-    </ul>`,
+    templateUrl: './app/items.component.html',
     providers: [ItemService]
 })
 
@@ -16,10 +14,15 @@ export class ItemsComponent {
     constructor(itemService: ItemService) {
         itemService.getItems()
             .subscribe(items => this.items = items,
-            error => console.error('************ Error **********')
+            error => console.error('* Error *')
             );
     }
 
-  // Hard coded items used before moved to the ItemService: 
+  // v.2 Injected a service with a getter function 
+  // constructor(itemService: ItemService) {
+  //      itemService.getItems();
+  // }
+  
+  // v.1 Hard coded items used before moved to the ItemService: 
   //  items : string[] = ["Item1", "Item2", "Item3", "Item4"];
 }
